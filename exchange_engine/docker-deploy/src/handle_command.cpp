@@ -18,7 +18,7 @@ string handle_command(const command & cmd, connection * C){
         ans = handle_transaction(cmd.transactions,C);
     }//2
     nontransaction N(*C);
-    show_results(C, N);
+    // show_results(C, N);
 
     return ans;
 }
@@ -560,7 +560,7 @@ trans_result trans_order(const parsed_transaction & order, connection *C){
                               << to_string(0) << " WHERE TRANS_ID = " << to_string(self_trans_id) << ";";
                         N.exec(query.str());
 
-                        cout << "-----------\n";
+                        // cout << "-----------\n";
                         //add self data in executed_trans
                         query.str("");
                         now = time(0);
@@ -673,7 +673,7 @@ trans_result trans_order(const parsed_transaction & order, connection *C){
     }
     ans.resultMsg = "Success";
     N.exec("COMMIT;");
-    cout << "look at this" << endl;
+    //cout << "look at this" << endl;
     // show_results(C, N);
     return ans;
 }
@@ -999,7 +999,7 @@ string parse_trans_result(const trans_result & tr){
 // }
 
 void show_results(connection * C, nontransaction &N) {
-    cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+    // cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
     stringstream ss;
     ss << "SELECT * FROM ACCOUNTS;";
     cout << "ACCOUNT_ID " << "BALANCE" << endl;
@@ -1056,5 +1056,5 @@ void show_results(connection * C, nontransaction &N) {
     }
     cout << endl;
 
-    cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+    // cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
 }

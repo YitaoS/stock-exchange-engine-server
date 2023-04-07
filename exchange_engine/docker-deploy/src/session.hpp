@@ -58,10 +58,10 @@ class session : public std::enable_shared_from_this<session> {
           {
             data_[length] = '\0';
             //handle_order();
-            cout << "-------------------------" << endl;
-            cout << "thread_num: " << num_thread << endl;
-            cout << data_ << endl;
-            cout << "-------------------------" << endl;
+            // cout << "-------------------------" << endl;
+            // cout << "thread_num: " << num_thread << endl;
+            // cout << data_ << endl;
+            // cout << "-------------------------" << endl;
             command cmd = parse(data_);
 
             connection * C;
@@ -108,9 +108,9 @@ class session : public std::enable_shared_from_this<session> {
             // }
 
             response = handle_command(cmd, C);
-            cout << "******************************" << endl;
-            cout << response << endl;
-            cout << "******************************" << endl;
+            // cout << "******************************" << endl;
+            // cout << response << endl;
+            // cout << "******************************" << endl;
             
             C->disconnect();
 
