@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=MATCH_ENGINE_DB
+      - POSTGRES_USER=postgres 
+      - POSTGRES_PASSWORD=passw0rd
+    volumes:
+      - data-volume:/var/lib/postgresql/database
+  server:
+    build: ./src
+    user: root
+    command: bash -c "cd /code && chmod o+x launch.sh && ./launch.sh"
+    volumes:
+      - ./src:/code
+    ports:
+      - "12345:12345"
+    depends_on:
+      - db
+volumes:
+  data-volume:

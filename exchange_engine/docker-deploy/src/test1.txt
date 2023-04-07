@@ -1,0 +1,11 @@
+456
+<create>
+    <account id="98765" balance="16"/>
+    <account id="87654" balance="16"/>
+    <symbol sym="SYM">
+        <account id="23456">100</account>
+        <account id="98765">200</account>
+        <account id="45678">300</account>
+        <account id="87654">400</account>
+    </symbol>
+</create>
