@@ -20,7 +20,7 @@ string handle_command(const command & cmd, connection * C){
     nontransaction N(*C);
     // show_results(C, N);
 
-    return ans;
+    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + ans;
 }
 
 string handle_create(const vector<parsed_create> & creates, connection * C){
@@ -785,7 +785,7 @@ trans_result trans_cancel(const parsed_transaction & cancel, connection *C){
     ans.trans_id = cancel.trans_id;
     
     query.str("");
-    query << "SELECT * FROM TRANSACTIONS WHERE TRANS_ID = " << to_string(cancel.trans_id) << "FOR UPDATE;";
+    query << "SELECT * FROM TRANSACTIONS WHERE TRANS_ID = " << to_string(cancel.trans_id) << " FOR UPDATE;";
     result R(N.exec(query.str()));
 
     if (R.empty()){
@@ -889,7 +889,6 @@ string parse_trans_results(const vector<trans_result> & trs){
 
 string parse_create_result(const create_result & cr) {
     stringstream ss;
-    // ss << '\t';
     if (cr.flag == 1) {
         ss << '\t';
         if (cr.resultMsg == "Success") {
@@ -902,12 +901,14 @@ string parse_create_result(const create_result & cr) {
     else {
         for (int i = 0; i < cr.account_share_list.size(); i++) {
             if (cr.result_list[i] == "Success") {
-                ss << '\t' << "<created sym=\"" << cr.symbol << "\" id=\"" << cr.account_share_list[i].first
-                   << "\'/>\n";
+                ss << '\t' ;
+                ss << "<created sym=\"" << cr.symbol << "\" id=\"" << cr.account_share_list[i].first
+                   << "\"/>\n";
             }
             else {
-                ss << '\t' << "<error sym=\"" << cr.symbol << "\" id=\"" << cr.account_share_list[i].first
-                   << "\'>" << cr.result_list[i] << "</error>\n";
+                ss << '\t';
+                ss << "<error sym=\"" << cr.symbol << "\" id=\"" << cr.account_share_list[i].first
+                   << "\">" << cr.result_list[i] << "</error>\n";
             }
         }
     }
